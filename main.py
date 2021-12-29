@@ -17,8 +17,16 @@ class Mylist(list):
 
 		return self.pop()
 
+
+
 FlatIterator = Mylist(nested_list)
 FlatIterator.reverse()
 for item in FlatIterator:
 	for key in item:
 		print (key)
+
+
+flat_list = [item for sublist in nested_list for item in sublist]
+print(flat_list)
+
+
