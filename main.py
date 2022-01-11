@@ -5,28 +5,34 @@ nested_list = [
 	[1, 2, None],
 ]
 
-
 class Mylist(list):
 
-	def __iter__(self):
-		return self
+
+	def __init__(self, list):
+		self.list = list
+
+	def getArray(self, array, output):
+		for item in array:
+			if isinstance(item, list):
+				self.getArray(item, output)
+			else:
+				print(item)
+				output.append(item)
+		return output
 
 	def __next__(self):
-		if len(self) == 0:
+		output = []
+		if len(self.list) == 0:
 			raise StopIteration
 
-		return self.pop()
-
-
+		return self.getArray(self.list, output)
 
 FlatIterator = Mylist(nested_list)
-FlatIterator.reverse()
-for item in FlatIterator:
-	for key in item:
-		print (key)
-
+FlatIterator.__next__()
 
 flat_list = [item for sublist in nested_list for item in sublist]
 print(flat_list)
+
+
 
 
